@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Long Way Round — A Guide to Bicycle Touring &amp; Bikepacking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,450&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --dusk:#212B22;
+    --dusk-panel:#283425;
+    --parchment:#EDE7D6;
+    --parchment-dim:#B7BFA9;
+    --rust:#C1481F;
+    --ochre:#D6A23E;
+    --teal:#4C6B62;
+    --line: rgba(237,231,214,0.16);
+    --max:1140px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--dusk);
+    color:var(--parchment);
+    font-family:'Work Sans', sans-serif;
+    font-size:16.5px;
+    line-height:1.64;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{ font-family:'Newsreader', serif; font-weight:500; margin:0; color:var(--parchment); }
+  p{ margin:0; }
+  a{ color:inherit; }
+  img{ display:block; max-width:100%; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 32px; }
+  ::selection{ background:var(--ochre); color:var(--dusk); }
+  :focus-visible{ outline:2px solid var(--rust); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* topographic contour-line background, used only behind the hero */
+  .contours{
+    background-image: repeating-radial-gradient(circle at 18% 30%, transparent 0 46px, rgba(237,231,214,0.045) 47px 48px);
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ochre);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:"✻"; color:var(--rust); }
+
+  /* ---------- Header ---------- */
+  header.site{ position:sticky; top:0; z-index:40; background:rgba(33,43,34,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:var(--max); margin:0 auto; }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:'Newsreader', serif; font-weight:600; font-size:20px; }
+  .brand svg{ width:22px; height:22px; }
+  .nav ul{ list-style:none; display:flex; gap:26px; margin:0; padding:0; font-size:14px; }
+  .nav ul a{ text-decoration:none; color:var(--parchment-dim); border-bottom:1px solid transparent; padding-bottom:2px; }
+  .nav ul a:hover{ color:var(--parchment); border-bottom-color:var(--rust); }
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; min-height:86vh; display:flex; align-items:flex-end; overflow:hidden; border-bottom:1px solid var(--line); }
+  .hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(1.05); }
+  .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,30,20,0.05) 0%, rgba(20,26,18,0.2) 40%, rgba(16,20,14,0.88) 100%); }
+  .hero-content{ position:relative; z-index:2; max-width:var(--max); margin:0 auto; width:100%; padding:0 32px 60px; }
+  .hero-content h1{ color:#F5F1E3; font-size:clamp(38px, 5.8vw, 68px); line-height:1.05; max-width:16ch; margin-top:18px; }
+  .hero-content h1 em{ font-style:italic; color:var(--ochre); }
+  .hero-content p.sub{ margin-top:20px; max-width:48ch; color:#D8D4C0; font-size:17.5px; }
+  .route-card{
+    margin-top:40px; display:inline-flex; gap:0; border:1px solid rgba(237,231,214,0.35);
+    background:rgba(20,26,18,0.55);
+  }
+  .route-card div{ padding:16px 22px; border-right:1px solid rgba(237,231,214,0.25); }
+  .route-card div:last-child{ border-right:none; }
+  .route-card .k{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--parchment-dim); letter-spacing:0.03em; }
+  .route-card .v{ font-family:'Newsreader', serif; font-size:19px; color:#F5F1E3; margin-top:4px; }
+
+  /* ---------- Sections ---------- */
+  section{ padding:92px 0; }
+  .section-head{ max-width:660px; margin-bottom:52px; }
+  .section-head h2{ font-size:clamp(27px, 3.4vw, 40px); line-height:1.14; margin-top:14px; }
+  .section-head .desc{ margin-top:14px; color:var(--parchment-dim); font-size:15.5px; }
+
+  /* ---------- Intro / journal note ---------- */
+  .journal{ display:grid; grid-template-columns: 0.95fr 1.05fr; gap:60px; align-items:start; }
+  .journal blockquote{
+    margin:0; font-family:'Newsreader', serif; font-style:italic; font-size:clamp(22px,2.6vw,28px);
+    line-height:1.4; color:#F5F1E3; border-left:2px solid var(--rust); padding-left:26px;
+  }
+  .journal .copy{ color:var(--parchment-dim); font-size:15.5px; }
+  .journal .copy p + p{ margin-top:16px; }
+
+  /* ---------- Two styles of touring ---------- */
+  .styles{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .style-col{ background:var(--dusk); padding:40px; }
+  .style-col .eyebrow{ margin-bottom:16px; }
+  .style-col h3{ font-size:24px; margin-bottom:12px; }
+  .style-col p{ color:var(--parchment-dim); font-size:15px; }
+  .style-col ul{ list-style:none; margin:20px 0 0; padding:0; }
+  .style-col li{ font-size:14px; color:var(--parchment-dim); padding:10px 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; }
+  .style-col li:first-child{ border-top:none; }
+  .style-col li b{ color:var(--parchment); font-weight:500; }
+
+  /* ---------- Route dossier cards (postcard style) ---------- */
+  .routes{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+  .route{ border:1px solid var(--line); }
+  .route .fig{ position:relative; height:280px; }
+  .route .fig img{ width:100%; height:100%; object-fit:cover; }
+  .route .fig .stamp{
+    position:absolute; top:16px; right:16px; font-family:'JetBrains Mono', monospace; font-size:10.5px;
+    color:#F5F1E3; background:rgba(20,26,18,0.65); border:1px solid rgba(237,231,214,0.4); padding:5px 9px;
+  }
+  .route .body{ padding:26px; }
+  .route .loc{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ochre); margin-bottom:10px; }
+  .route h3{ font-size:21px; margin-bottom:10px; }
+  .route p{ color:var(--parchment-dim); font-size:14.5px; }
+  .route .stats{ display:flex; gap:22px; margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
+  .route .stats div .n{ font-family:'Newsreader', serif; font-size:18px; color:var(--parchment); }
+  .route .stats div .l{ font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--parchment-dim); margin-top:2px; }
+
+  /* ---------- Gear checklist ---------- */
+  .gear-wrap{ display:grid; grid-template-columns: 1fr 1fr; gap:60px; }
+  .gear-fig{ position:relative; }
+  .gear-fig img{ width:100%; height:520px; object-fit:cover; }
+  .gear-fig .stamp{ position:absolute; bottom:18px; left:18px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#F5F1E3; background:rgba(20,26,18,0.65); border:1px solid rgba(237,231,214,0.4); padding:6px 10px; }
+  .gear-list{ list-style:none; margin:0; padding:0; }
+  .gear-list li{ display:grid; grid-template-columns:120px 1fr; gap:20px; padding:18px 0; border-top:1px solid var(--line); }
+  .gear-list li:first-child{ border-top:none; }
+  .gear-list .cat{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--rust); padding-top:2px; }
+  .gear-list h4{ font-size:16px; font-weight:500; margin-bottom:4px; }
+  .gear-list p{ font-size:14px; color:var(--parchment-dim); }
+
+  /* ---------- Planning steps ---------- */
+  .plan-list{ counter-reset:p; }
+  .plan{ display:grid; grid-template-columns:80px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--line); }
+  .plan:last-child{ border-bottom:1px solid var(--line); }
+  .plan .n{ font-family:'Newsreader', serif; font-style:italic; font-size:30px; color:var(--teal); }
+  .plan h3{ font-size:18.5px; font-weight:500; margin-bottom:6px; }
+  .plan p{ font-size:14.5px; color:var(--parchment-dim); max-width:62ch; }
+
+  /* ---------- Quote / vista ---------- */
+  .vista{ position:relative; padding:130px 0; overflow:hidden; }
+  .vista img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .vista::after{ content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(16,20,14,0.85) 25%, rgba(16,20,14,0.3) 75%); }
+  .vista-inner{ position:relative; z-index:2; max-width:680px; }
+  .vista-inner p{ font-family:'Newsreader', serif; font-style:italic; font-weight:450; font-size:clamp(23px,3vw,33px); color:#F5F1E3; line-height:1.4; }
+  .vista-inner .attr{ margin-top:22px; font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ochre); }
+
+  /* ---------- Closing ---------- */
+  .closing{ border-top:1px solid var(--line); padding:104px 0; }
+  .closing-inner{ max-width:600px; }
+  .closing h2{ font-size:clamp(28px,4vw,44px); line-height:1.1; }
+  .closing p{ margin-top:18px; color:var(--parchment-dim); font-size:16.5px; max-width:52ch; }
+  .btn{ display:inline-flex; align-items:center; gap:10px; margin-top:32px; padding:14px 26px; font-size:14.5px; font-family:'JetBrains Mono', monospace; text-decoration:none; border:1px solid var(--parchment); color:var(--parchment); }
+  .btn:hover{ background:var(--parchment); color:var(--dusk); }
+
+  footer{ border-top:1px solid var(--line); padding:40px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+  .foot-note{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--parchment-dim); max-width:48ch; }
+
+  @media (max-width: 880px){
+    .journal, .gear-wrap{ grid-template-columns:1fr; gap:28px; }
+    .styles{ grid-template-columns:1fr; }
+    .routes{ grid-template-columns:1fr; }
+    .gear-fig img{ height:280px; }
+    .route-card{ flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17c3-6 6-9 9-9s6 3 9 9M3 17h18M8 17l3-6M16 17l-3-6"/></svg>
+      The Long Way Round
+    </div>
+    <ul>
+      <li><a href="#styles">Touring Styles</a></li>
+      <li><a href="#routes">Routes</a></li>
+      <li><a href="#gear">Gear</a></li>
+      <li><a href="#plan">Planning</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero contours">
+  <img src="https://images.unsplash.com/photo-1620679031965-78c27001de39?w=1800&auto=format&fit=crop&q=80" alt="A mountain bike resting on white sand near a body of water during daytime">
+  <div class="hero-content">
+    <div class="eyebrow">BICYCLE TOURING &amp; BIKEPACKING</div>
+    <h1>The best maps only show <em>where the road goes.</em></h1>
+    <p class="sub">A practical guide to multi-day cycling — the two ways to tour, the gear that actually earns its weight, and a handful of the world's great long rides.</p>
+    <div class="route-card">
+      <div><div class="k mono">ORIGIN</div><div class="v">Home</div></div>
+      <div><div class="k mono">RANGE</div><div class="v">2 – 2,000 mi</div></div>
+      <div><div class="k mono">PACE</div><div class="v">Your own</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap journal">
+    <blockquote>"You see so much more of a country from a bicycle than you do from a car... you are in the scene, not just watching it."</blockquote>
+    <div class="copy">
+      <p>Bicycle touring is the plainest possible way to travel: everything you need is carried on the bike, the route unfolds at roughly walking-plus speed, and the towns, weather, and terrain all become part of the trip rather than a blur outside a window.</p>
+      <p>It scales from an overnight ride to a nearby campsite to a summer spent crossing a continent. This page covers both ends of that range — what separates the two main styles of touring, a short list of real routes people actually ride, the gear that matters, and how to plan a first trip without overcomplicating it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="styles">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">TWO WAYS TO TOUR</div>
+      <h2>Loaded touring and bikepacking solve the same problem differently</h2>
+      <p class="desc">Both mean multi-day, self-supported riding — they differ mainly in the bike, the bags, and the terrain each is built for.</p>
+    </div>
+    <div class="styles">
+      <div class="style-col">
+        <div class="eyebrow">CLASSIC</div>
+        <h3>Loaded touring</h3>
+        <p>Rigid front and rear panniers mounted on racks, usually on a sturdy touring or gravel bike, ridden mostly on paved roads and established routes between towns.</p>
+        <ul>
+          <li><span>Terrain</span><b>Paved &amp; light gravel</b></li>
+          <li><span>Typical load</span><b>25–40 lb</b></li>
+          <li><span>Best for</span><b>Long road distances, resupply towns</b></li>
+        </ul>
+      </div>
+      <div class="style-col">
+        <div class="eyebrow">MODERN</div>
+        <h3>Bikepacking</h3>
+        <p>Soft, frame-mounted bags on a mountain or gravel bike, built to keep the bike narrow and light enough for singletrack, remote trail, and technical terrain.</p>
+        <ul>
+          <li><span>Terrain</span><b>Trail, gravel, remote backcountry</b></li>
+          <li><span>Typical load</span><b>10–20 lb</b></li>
+          <li><span>Best for</span><b>Off-road routes, minimal resupply</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="routes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FIELD NOTES</div>
+      <h2>Five long rides worth knowing about</h2>
+      <p class="desc">A starting list, from weekend-friendly to multi-month — each one well documented by riders who've done it.</p>
+    </div>
+    <div class="routes">
+      <div class="route">
+        <div class="fig">
+          <img src="https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=700&auto=format&fit=crop&q=80" alt="An off-road touring bicycle resting on a hillside">
+          <div class="stamp mono">NO. 01</div>
+        </div>
+        <div class="body">
+          <div class="loc mono">USA — WEST COAST</div>
+          <h3>Pacific Coast Highway</h3>
+          <p>A classic paved tour tracing the U.S. West Coast, with hiker-biker campsites spaced for easy daily stages and ocean views for most of the ride.</p>
+          <div class="stats">
+            <div><div class="n">~1,850 mi</div><div class="l mono">DISTANCE</div></div>
+            <div><div class="n">4–6 wks</div><div class="l mono">TYPICAL PACE</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="fig">
+          <img src="https://images.unsplash.com/photo-1697475338985-3cac4ffbf7b6?w=700&auto=format&fit=crop&q=80" alt="Silhouette of a touring bicycle loaded with bags">
+          <div class="stamp mono">NO. 02</div>
+        </div>
+        <div class="body">
+          <div class="loc mono">FRANCE / SPAIN</div>
+          <h3>The Camino de Santiago (cycling route)</h3>
+          <p>A centuries-old pilgrim path adapted for bike travel, with well-marked stages, frequent towns, and an unusually social route culture among riders.</p>
+          <div class="stats">
+            <div><div class="n">~500 mi</div><div class="l mono">DISTANCE</div></div>
+            <div><div class="n">1–2 wks</div><div class="l mono">TYPICAL PACE</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="fig">
+          <img src="https://images.unsplash.com/photo-1572884901053-b3f1896aea8e?w=700&auto=format&fit=crop&q=80" alt="A mountain bike parked beside a rock formation on a trail">
+          <div class="stamp mono">NO. 03</div>
+        </div>
+        <div class="body">
+          <div class="loc mono">USA — ROCKY MOUNTAINS</div>
+          <h3>Great Divide Mountain Bike Route</h3>
+          <p>The benchmark long-distance bikepacking route in North America, following the Continental Divide on mostly unpaved forest and gravel roads.</p>
+          <div class="stats">
+            <div><div class="n">~2,700 mi</div><div class="l mono">DISTANCE</div></div>
+            <div><div class="n">6–10 wks</div><div class="l mono">TYPICAL PACE</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="route">
+        <div class="fig">
+          <img src="https://images.unsplash.com/photo-1628537886692-f8e435513854?w=700&auto=format&fit=crop&q=80" alt="A cyclist with a backpack riding a bicycle through open countryside">
+          <div class="stamp mono">NO. 04</div>
+        </div>
+        <div class="body">
+          <div class="loc mono">NETHERLANDS</div>
+          <h3>Dutch national cycle network (LF-routes)</h3>
+          <p>A dense, fully signposted network of dedicated cycling paths connecting nearly every town — the standard reference for what cycling infrastructure can be.</p>
+          <div class="stats">
+            <div><div class="n">9,000+ mi</div><div class="l mono">NETWORK TOTAL</div></div>
+            <div><div class="n">Any length</div><div class="l mono">TYPICAL PACE</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gear">
+  <div class="wrap gear-wrap">
+    <div class="gear-fig">
+      <img src="https://images.unsplash.com/photo-1591035742999-2398c2ad8607?w=900&auto=format&fit=crop&q=80" alt="A man riding a mountain bike outdoors during daytime on a touring trip">
+      <div class="stamp mono">FIG. — PACKED &amp; READY</div>
+    </div>
+    <div>
+      <div class="section-head" style="margin-bottom:32px;">
+        <div class="eyebrow">WHAT TO CARRY</div>
+        <h2>Gear that earns its weight</h2>
+      </div>
+      <ul class="gear-list">
+        <li><div class="cat mono">SHELTER</div><div><h4>Tent or bivy, sleep pad</h4><p>Weight and pack size matter more here than almost anywhere else on the bike — a lighter shelter is worth the extra cost.</p></div></li>
+        <li><div class="cat mono">REPAIR</div><div><h4>Spare tube, pump, multi-tool, patch kit</h4><p>The minimum to fix a flat or a loose bolt without walking. A spare derailleur hanger is smart on remote routes.</p></div></li>
+        <li><div class="cat mono">NAVIGATION</div><div><h4>GPS device or phone with offline maps</h4><p>Paper maps as backup — batteries and signal both fail at inconvenient moments.</p></div></li>
+        <li><div class="cat mono">CLOTHING</div><div><h4>Layered, quick-drying, one spare set</h4><p>You will wash clothes in a sink more often than you'll wear something new — pack for laundering, not for outfits.</p></div></li>
+        <li><div class="cat mono">WATER &amp; FOOD</div><div><h4>Filter or purification tablets, extra capacity</h4><p>Carry more water capacity than you think you'll need on any route with uncertain resupply.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FIRST TRIP</div>
+      <h2>Planning a first tour, without overplanning it</h2>
+    </div>
+    <div class="plan-list">
+      <div class="plan"><div class="n">1</div><div><h3>Start with an overnight, not a continent</h3><p>A single night away, twenty or thirty miles from home, tests your gear, your fitness, and your appetite for the whole thing before you commit real time to it.</p></div></div>
+      <div class="plan"><div class="n">2</div><div><h3>Follow an established route for the first one</h3><p>Existing touring routes come with known water sources, camping spots, and town spacing already worked out — save the fully improvised route for later trips.</p></div></div>
+      <div class="plan"><div class="n">3</div><div><h3>Pack, then remove a third of it</h3><p>Almost every first-time tourer overpacks. Lay everything out, then take out anything you can't name a specific use for.</p></div></div>
+      <div class="plan"><div class="n">4</div><div><h3>Plan daily distance around terrain, not averages</h3><p>A loaded bike on hills covers much less ground per hour than an unloaded one on flat pavement — plan mileage around the actual route, not a generic daily target.</p></div></div>
+      <div class="plan"><div class="n">5</div><div><h3>Build in a rest day</h3><p>One unscheduled day, even on a short trip, absorbs weather delays, mechanical issues, or simply a town worth staying in a little longer.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="vista">
+  <img src="https://images.unsplash.com/photo-1664015521235-13193b0fb560?w=1600&auto=format&fit=crop&q=80" alt="A cyclist riding a bicycle on a rocky hillside trail">
+  <div class="wrap vista-inner">
+    <p>"It is by riding a bicycle that you learn the contours of a country best, since you have to sweat up the hills and coast down them."</p>
+    <div class="attr mono">ERNEST HEMINGWAY</div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap closing-inner">
+    <div class="eyebrow">LAST NOTE</div>
+    <h2>The route matters less than actually leaving.</h2>
+    <p>Most people who tour once do it again — not because the first trip was easy, but because a loaded bike and an open road turn out to be a surprisingly good way to spend a week.</p>
+    <a href="#plan" class="btn">Read the planning steps →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><path d="M3 17c3-6 6-9 9-9s6 3 9 9M3 17h18M8 17l3-6M16 17l-3-6"/></svg>
+      The Long Way Round
+    </div>
+    <p class="foot-note">An independent guide to bicycle touring and bikepacking — general route and planning information, not affiliated with any outfitter, brand, or tour operator. Photography via Unsplash contributors.</p>
+  </div>
+</footer>
+
+</body>
+</html>
